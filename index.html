@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geolocalización</title>
+</head>
+<body>
+   <p id="posicion"></p>
+    <script>
+        function mostrarPosicion(latitud, longitud) {
+            document.getElementById("posicion").innerText = latitud + ", " + longitud;
+        }
+        
+        function inicializar() {
+            if("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(function(position) { mostrarPosicion(position.coords.latitude, position.coords.longitude);});
+            } else {
+                console.log("No está disponible la geolocalización");
+            }
+        }
+        
+        window.onload = inicializar;
+    </script>
+</body>
+</html>
