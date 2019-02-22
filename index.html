@@ -8,16 +8,39 @@
 
 <body>
     <div class="load" id="load">
-        <p>15410596 - Juan Daniel Martinez Navarro</p>
+        <b>15410596 - Juan Daniel Martinez Navarro</b>
         <p>Obteniendo ubicación</p>
     </div>
+    
+    <div class="route" id="route" hidden>
+        <form action="">
+           <label for="modo">Modo de viaje:</label>
+            <select name="modo" id="modo">
+                <option value="auto">En auto</option>
+                <option value="caminando">Caminando</option>
+                <option value="bici">En bicicleta</option>
+                <option value="transporte">En transporte público</option>
+            </select>
+            <label for="lugar">Destino:</label>
+            <select name="lugar" id="lugar">
+                <option value="museo">Museo de Villa</option>
+                <option value="palacio">Palacio Alvarado</option>
+                <option value="mina">Mina La Prieta</option>
+                <option value="foro">Foro Villista</option>
+                <option value="puerta">Puerta del Tiempo</option>
+                <option value="estadio">Gran Estadio Parral</option>
+                <option value="olimpico">Estadio Olímpico Parral</option>
+            </select>
+            <button id="calcular" class="calcular">Calcular Ruta</button>
+        </form>
+    </div>
+    
     <div id="map"></div>
     <script>
         // Inicializar mapa centrado en Parral
         function initMap() {
             var load = document.getElementById('load');
-            load.style.display = 'block';
-
+            var route = document.getElementById('route');
             // Si la geolocalización está habilitada
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
@@ -34,8 +57,9 @@
                         zoom: 15
                     });
 
-                    // Ocultar contenedor de carga
+                    // Ocultar contenedor de carga y mostrar el de trazar ruta
                     load.style.display = 'none';
+                    route.style.display = 'block';
                     
                     // Centrar mapa en posicion
                     map.setCenter(pos);
@@ -52,6 +76,7 @@
             }
         }
 
+        // Mostrar alerts de acuerdo al error
         function mostrarErrores(error) {
             switch (error.code) {
                 case error.PERMISSION_DENIED:
