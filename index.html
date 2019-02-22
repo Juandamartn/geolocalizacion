@@ -3,11 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Geolocalización</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+  <h1>Geolocalización con Google Maps</h1>
    <p id="posicion"></p>
-    <script>
-        function mostrarPosicion(latitud, longitud) {
+   <div id="map"></div>
+   <script>
+    function initMap() {
+        var options = {
+            // Opciones del Mapa
+            zoom: 16,
+            center: {lat:26.9186189, lng: -105.6667671}
+        }
+        // Nuevo mapa
+        var map = new google.maps.Map(document.getElementById('map'), options);
+        
+        // Añadiendo marcador
+        var marker = new google.maps.Marker({
+            position: {lat: 26.9186189, lng: -105.6667671},
+            map: map
+        });
+        
+        // Añadiendo pop-up de informacion
+        var infoWindow = new google.maps.InfoWindow({
+            content: '<p>Estas aquí</p>'
+        });
+        
+        // Añadiendo listener al marcador
+        marker.addListener('click', function() {
+            infoWindow.open(map, marker);
+        });
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC75jJrrQe0xAlMfnJIyCqKQBbDdRfcSV8&callback=initMap"
+        async defer>
+        /*function mostrarPosicion(latitud, longitud) {
             document.getElementById("posicion").innerText = latitud + ", " + longitud;
         }
         
@@ -19,7 +50,7 @@
             }
         }
         
-        window.onload = inicializar;
+        window.onload = inicializar;*/
     </script>
 </body>
 </html>
