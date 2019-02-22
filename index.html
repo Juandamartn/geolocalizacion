@@ -16,24 +16,24 @@
 
     <div class="route" id="route" hidden>
         <h1>Geolocalización</h1>
-            <label for="modo">Modo de viaje:</label>
-            <select name="modo" id="modo">
-                <option value="DRIVING">En auto</option>
-                <option value="WALKING">Caminando</option>
-                <option value="BICYCLING">En bicicleta</option>
-                <option value="TRANSIT">En transporte público</option>
-            </select>
-            <label for="lugar">Destino:</label>
-            <select name="lugar" id="lugar">
-                <option value="museo francisco villa parral">Museo de Villa</option>
-                <option value="palacio alvarado parral">Palacio Alvarado</option>
-                <option value="mina la prieta parral">Mina La Prieta</option>
-                <option value="foro villista parral">Foro Villista</option>
-                <option value="puerta del tiempo parral">Puerta del Tiempo</option>
-                <option value="gran estadio parral">Gran Estadio Parral</option>
-                <option value="estadio olimpico parral">Estadio Olímpico Parral</option>
-            </select>
-            <button id="calcular" class="calcular"><i class="fas fa-map-marked-alt"></i>Calcular Ruta</button>
+        <label for="modo">Modo de viaje:</label>
+        <select name="modo" id="modo">
+            <option value="DRIVING">En auto</option>
+            <option value="WALKING">Caminando</option>
+            <option value="BICYCLING">En bicicleta</option>
+            <option value="TRANSIT">En transporte público</option>
+        </select>
+        <label for="lugar">Destino:</label>
+        <select name="lugar" id="lugar">
+            <option value="museo francisco villa parral">Museo de Villa</option>
+            <option value="palacio alvarado parral">Palacio Alvarado</option>
+            <option value="mina la prieta parral">Mina La Prieta</option>
+            <option value="foro villista parral">Foro Villista</option>
+            <option value="puerta del tiempo parral">Puerta del Tiempo</option>
+            <option value="gran estadio parral">Gran Estadio Parral</option>
+            <option value="estadio olimpico parral">Estadio Olímpico Parral</option>
+        </select>
+        <button id="calcular" class="calcular"><i class="fas fa-map-marked-alt"></i>Calcular Ruta</button>
     </div>
 
     <div id="map"></div>
@@ -91,21 +91,26 @@
 
         // Calcular y mostrar ruta
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-            var selectedMode = document.getElementById('modo').value;
-            directionsService.route({
-                origin: {
-                    lat: 26.933071257230367,
-                    lng: -105.66370751376643
-                },
-                destination: document.getElementById('lugar').value,
-                travelMode: google.maps.TravelMode[selectedMode]
-            }, function(response, status) {
-                if (status == 'OK') {
-                    directionsDisplay.setDirections(response);
-                } else {
-                    window.alert('Solicitud de indicaciones fallida debido a ' + status);
-                }
-            });
+
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                var selectedMode = document.getElementById('modo').value;
+                directionsService.route({
+                    origin: pos,
+                    destination: document.getElementById('lugar').value,
+                    travelMode: google.maps.TravelMode[selectedMode]
+                }, function(response, status) {
+                    if (status == 'OK') {
+                        directionsDisplay.setDirections(response);
+                    } else {
+                        window.alert('Solicitud de indicaciones fallida debido a ' + status);
+                    }
+                });
+            }, mostrarErrores);
         }
 
         // Mostrar alerts de acuerdo al error
