@@ -1,9 +1,61 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: sans-serif;
 }
 
 #map {
-    height: 400px;
+    height: 500px;
     width: 100%;
+}
+
+.route {
+    
+}
+
+.load {
+    margin: auto;
+    width: 50%;
+    margin-top: 100px;
+    text-align: center;
+    padding: 20px;
+    background: #03A9F4;
+    border-radius: 5px;
+}
+
+.load b {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.load p {
+    color: #B3E5FC;
+}
+
+.route {
+    text-align: center;
+    background: #03A9F4;
+    padding: 20px;
+}
+
+.route select {
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+    color: #212121;
+}
+
+.route label {
+    color: #B3E5FC;margin-left: 10px;
+}
+
+.route button {
+    border: none;
+    padding: 10px;
+    margin-left: 20px;
+    background: #9E9E9E;
+    color: #fff;
+    font-size: 20px;
 }
