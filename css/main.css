@@ -64,6 +64,11 @@
     padding: 20px;
 }
 
+.route h1 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
 .route select {
     padding: 5px;
     border-radius: 3px;
@@ -82,4 +87,8 @@
     background: #9E9E9E;
     color: #fff;
     font-size: 20px;
+}
+
+.route i {
+    margin-right: 10px;
 }
